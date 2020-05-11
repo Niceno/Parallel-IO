@@ -5,19 +5,17 @@
 !------------------------------------------------------------------------------!
   include 'mpif.h' 
 !------------------------------------------------------------------------------!
-  integer        , parameter :: N_CELL_SUB = 10
-  integer        , parameter :: TEXT_SIZE  = 80
-  integer        , parameter :: INT_SIZE   =  8
-  integer        , parameter :: DATA_SIZE  =  8
-  integer(kind=4)    :: map(N_CELL_SUB)
-  integer            :: this_proc
-  integer            :: n_proc
-  integer            :: n_var
-  integer            :: n_cell_tot
+  integer(8),  parameter   :: LI         =   8  ! long integer size
+  integer(8),  parameter   :: SI         =   4  ! short integer size
+  integer(8),  parameter   :: LR         =   8  ! double precision real
+  integer(8),  parameter   :: SR         =   4  ! single precision real
+  integer(LI), parameter   :: N_CELL_TOT = 720  ! 2*3*4*5*6
+  integer(LI), parameter   :: TEXT_SIZE  =  80
+  integer(LI), parameter   :: N_VAR      =   4
+  integer(SI), allocatable :: map(:)
+  integer(LI)              :: this_proc
+  integer(LI)              :: n_proc
+  integer(LI)              :: n_cell_sub
 !------------------------------------------------------------------------------!
-
-  contains
-
-  include 'Global_Mod/Init.f90'
 
   end module

@@ -5,20 +5,21 @@
 !------------------------------------------------------------------------------!
   implicit none
 !------------------------------------------------------------------------------!
-  integer                  :: i, var
-  integer                  :: offset
-  real, allocatable        :: s_buff(:)
+  integer(LI) :: Offset
+!------------------------------------------------------------------------------!
+  integer(LI)              :: i, var
+  real(LR), allocatable    :: s_buff(:)
   character(len=TEXT_SIZE) :: var_name
 !------------------------------------------------------------------------------!
 
   if(this_proc .ne. 1) return
- 
+
   allocate(s_buff(N_CELL_SUB * n_proc))
 
   ! Fill (local) buffer with some values
   do i = 1, n_cell_tot
-    s_buff(i) = i 
-  end do 
+    s_buff(i) = i
+  end do
 
   ! Create file sequentially 
   open(9, file='testfile', access='stream', form='unformatted')
@@ -26,7 +27,7 @@
   !----------------------------------------------------------------!
   !   Write header; that is all variable names and their offsets   !
   !----------------------------------------------------------------!
-  do var = 1, n_var
+  do var = 1, N_VAR
 
     ! Set variable name
     var_name = 'variable_'
@@ -43,7 +44,7 @@
   !-------------------------------!
   !   Write all variable values   !
   !-------------------------------!
-  do var = 1, n_var
+  do var = 1, N_VAR
 
     ! Set different values for different variables
     s_buff = s_buff + 1000
@@ -55,5 +56,5 @@
 
   ! Close file
   close(9)
-  
+
   end subroutine
